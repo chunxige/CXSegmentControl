@@ -95,18 +95,26 @@
 				D320D2D627A50CAB00080439 /* AppDelegate.swift */,
 				D320D2D827A50CAB00080439 /* SceneDelegate.swift */,
 				D320D2DA27A50CAB00080439 /* ViewController.swift */,
-				D320D2EA27A50CE900080439 /* CXSegmentControl.swift */,
-				D320D2EC27A50D3400080439 /* CXSegmentItem.swift */,
-				D3EF490628DA9F7A009E34DD /* CXSegmentItemCell.swift */,
-				D3EF490C28DAFAE6009E34DD /* CXSegmentLabel.swift */,
-				D3EF490A28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift */,
-				D3EF490E28DAFD29009E34DD /* CXSegmentVisibleType.swift */,
+				D3EF491028DB011E009E34DD /* Sources */,
 				D320D2DC27A50CAB00080439 /* Main.storyboard */,
 				D320D2DF27A50CAC00080439 /* Assets.xcassets */,
 				D320D2E127A50CAC00080439 /* LaunchScreen.storyboard */,
 				D320D2E427A50CAC00080439 /* Info.plist */,
 			);
 			path = SegmentControl;
+			sourceTree = "<group>";
+		};
+		D3EF491028DB011E009E34DD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D320D2EA27A50CE900080439 /* CXSegmentControl.swift */,
+				D320D2EC27A50D3400080439 /* CXSegmentItem.swift */,
+				D3EF490628DA9F7A009E34DD /* CXSegmentItemCell.swift */,
+				D3EF490C28DAFAE6009E34DD /* CXSegmentLabel.swift */,
+				D3EF490A28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift */,
+				D3EF490E28DAFD29009E34DD /* CXSegmentVisibleType.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
