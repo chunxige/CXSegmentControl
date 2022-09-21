@@ -8,11 +8,6 @@
 import Foundation
 import UIKit
 
-enum CXSegmentVisibleType {
-    case dynamic
-    case fixed(maxVisibleItems: Int)
-}
-
 struct CXSegmentIndicatorConfig {
     var height: CGFloat
     var width: WidthStyle

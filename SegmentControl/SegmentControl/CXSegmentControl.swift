@@ -108,6 +108,7 @@ class CXSegmentControl: UIView {
         self.collectionView(collectView, didDeselectItemAt: selectedIndexPath)
         selectedIndex = index
         collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: animated)
+        collectView.selectItem(at: selectedIndexPath, animated: animated, scrollPosition: .centeredHorizontally)
         self.collectionView(collectView, didSelectItemAt: selectedIndexPath)
     }
     

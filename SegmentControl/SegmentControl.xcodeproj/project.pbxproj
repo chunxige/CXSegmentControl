@@ -17,8 +17,9 @@
 		D320D2EB27A50CE900080439 /* CXSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D320D2EA27A50CE900080439 /* CXSegmentControl.swift */; };
 		D320D2ED27A50D3400080439 /* CXSegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D320D2EC27A50D3400080439 /* CXSegmentItem.swift */; };
 		D3EF490728DA9F7A009E34DD /* CXSegmentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF490628DA9F7A009E34DD /* CXSegmentItemCell.swift */; };
-		D3EF490B28DADE2D009E34DD /* CXSegmentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF490A28DADE2D009E34DD /* CXSegmentConfig.swift */; };
+		D3EF490B28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF490A28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift */; };
 		D3EF490D28DAFAE6009E34DD /* CXSegmentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF490C28DAFAE6009E34DD /* CXSegmentLabel.swift */; };
+		D3EF490F28DAFD29009E34DD /* CXSegmentVisibleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF490E28DAFD29009E34DD /* CXSegmentVisibleType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +35,9 @@
 		D320D2EA27A50CE900080439 /* CXSegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentControl.swift; sourceTree = "<group>"; };
 		D320D2EC27A50D3400080439 /* CXSegmentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentItem.swift; sourceTree = "<group>"; };
 		D3EF490628DA9F7A009E34DD /* CXSegmentItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentItemCell.swift; sourceTree = "<group>"; };
-		D3EF490A28DADE2D009E34DD /* CXSegmentConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentConfig.swift; sourceTree = "<group>"; };
+		D3EF490A28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentIndicatorConfig.swift; sourceTree = "<group>"; };
 		D3EF490C28DAFAE6009E34DD /* CXSegmentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentLabel.swift; sourceTree = "<group>"; };
+		D3EF490E28DAFD29009E34DD /* CXSegmentVisibleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSegmentVisibleType.swift; sourceTree = "<group>"; };
 		F51B5711BDD5C8E16E867A4E /* Pods-SegmentControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SegmentControl.debug.xcconfig"; path = "Target Support Files/Pods-SegmentControl/Pods-SegmentControl.debug.xcconfig"; sourceTree = "<group>"; };
 		FCFA887786168787DC014A57 /* Pods_SegmentControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SegmentControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,7 +99,8 @@
 				D320D2EC27A50D3400080439 /* CXSegmentItem.swift */,
 				D3EF490628DA9F7A009E34DD /* CXSegmentItemCell.swift */,
 				D3EF490C28DAFAE6009E34DD /* CXSegmentLabel.swift */,
-				D3EF490A28DADE2D009E34DD /* CXSegmentConfig.swift */,
+				D3EF490A28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift */,
+				D3EF490E28DAFD29009E34DD /* CXSegmentVisibleType.swift */,
 				D320D2DC27A50CAB00080439 /* Main.storyboard */,
 				D320D2DF27A50CAC00080439 /* Assets.xcassets */,
 				D320D2E127A50CAC00080439 /* LaunchScreen.storyboard */,
@@ -222,12 +225,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D320D2ED27A50D3400080439 /* CXSegmentItem.swift in Sources */,
-				D3EF490B28DADE2D009E34DD /* CXSegmentConfig.swift in Sources */,
+				D3EF490B28DADE2D009E34DD /* CXSegmentIndicatorConfig.swift in Sources */,
 				D320D2EB27A50CE900080439 /* CXSegmentControl.swift in Sources */,
 				D320D2DB27A50CAB00080439 /* ViewController.swift in Sources */,
 				D320D2D727A50CAB00080439 /* AppDelegate.swift in Sources */,
 				D3EF490D28DAFAE6009E34DD /* CXSegmentLabel.swift in Sources */,
 				D320D2D927A50CAB00080439 /* SceneDelegate.swift in Sources */,
+				D3EF490F28DAFD29009E34DD /* CXSegmentVisibleType.swift in Sources */,
 				D3EF490728DA9F7A009E34DD /* CXSegmentItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +390,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -415,6 +420,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
