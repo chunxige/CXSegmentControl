@@ -11,6 +11,7 @@ class CXSegmentControl: UIView {
     lazy var collectView: UICollectionView = {
         let v = UICollectionView.init(frame: .zero, collectionViewLayout: collectionViewlayout)
         v.register(CXSegmentItemCell.self, forCellWithReuseIdentifier: CXSegmentItemCell.identify)
+        v.backgroundColor = .clear
         v.isPagingEnabled = false
         v.showsHorizontalScrollIndicator = false
         v.showsVerticalScrollIndicator = false
@@ -20,20 +21,28 @@ class CXSegmentControl: UIView {
         return v
     }()
     
-    var visibleType: CXSegmentVisibleType = .fixed(maxVisibleItems: 6)
+    var visibleType: CXSegmentVisibleType = .dynamic
     
     var items: [CXSegmentItem] = []
     
     var indicatorConfig = CXSegmentIndicatorConfig.default
     
+    var valueDidChange: (Int) -> Void = {_ in }
+    
+    var defaultSelectedIndex = 0
+    
     private let indicatorView = UIView()
     
-    public private(set) var selectedIndex = 0
+    public private(set) var selectedIndex = 0 {
+        didSet {
+            valueDidChange(selectedIndex)
+        }
+    }
     
     lazy var collectionViewlayout: UICollectionViewFlowLayout = {
         let l = UICollectionViewFlowLayout.init()
         l.scrollDirection = .horizontal
-        l.minimumInteritemSpacing = 10
+        l.minimumInteritemSpacing = 50
         return l
     }()
     
@@ -59,7 +68,7 @@ class CXSegmentControl: UIView {
             return
         }
         _isFristLayout = false
-        updateIndicator()
+        selectIndex(defaultSelectedIndex, animated: false)
     }
     
     private func setup() {
@@ -77,7 +86,7 @@ class CXSegmentControl: UIView {
         indicatorView.layer.cornerRadius = indicatorConfig.cornerRadius
     }
     
-    private func updateIndicator() {
+    private func updateIndicator(animted: Bool) {
         var indicatorFrame = CGRect.zero
         indicatorFrame.size.height = indicatorConfig.height
         switch indicatorConfig.width {
@@ -101,17 +110,19 @@ class CXSegmentControl: UIView {
         case .bottom:
             indicatorFrame.origin.y = frame.height - indicatorConfig.padding - indicatorConfig.height
         }
-        indicatorView.frame = indicatorFrame
+        UIView.animate(withDuration: animted ? 0.2 : 0, delay: 0) {
+            self.indicatorView.frame = indicatorFrame
+        }
     }
     
     func selectIndex(_ index: Int, animated: Bool) {
-        self.collectionView(collectView, didDeselectItemAt: selectedIndexPath)
         selectedIndex = index
         collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: animated)
-        collectView.selectItem(at: selectedIndexPath, animated: animated, scrollPosition: .centeredHorizontally)
-        self.collectionView(collectView, didSelectItemAt: selectedIndexPath)
+        collectView.collectionViewLayout.invalidateLayout()
+        collectView.reloadData()
+        updateIndicator(animted: animated)
     }
-    
+ 
     private var selectedIndexPath: IndexPath {
         IndexPath.init(item: selectedIndex, section: 0)
     }
@@ -169,31 +180,11 @@ extension CXSegmentControl: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CXSegmentItemCell else { return }
         selectedIndex = indexPath.item
-        let item = items[indexPath.item]
-        cell.imageView.image = item.content.image?.selectedImage
-        UIView.animate(withDuration: 0.2, delay: 0) {
-            cell.label.font = item.content.text?.selectedFont
-            cell.label.backgroundColor = item.content.text?.selectedBackgroundColor
-            cell.label.textColor = item.content.text?.selectedColor
-            self.collectView.layoutIfNeeded()
-            self.updateIndicator()
-            self.collectView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CXSegmentItemCell else { return }
-        let item = items[indexPath.item]
-        cell.imageView.image = item.content.image?.normalImage
-        
-        UIView.animate(withDuration: 0.2, delay: 0) {
-            cell.label.backgroundColor = item.content.text?.backgroundColor
-            cell.label.textColor = item.content.text?.color
-            cell.label.font = item.content.text?.font
-            self.collectView.layoutIfNeeded()
-        }
+        collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: true)
+        collectView.collectionViewLayout.invalidateLayout()
+        collectView.reloadData()
+        updateIndicator(animted: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -212,6 +203,6 @@ extension CXSegmentControl: UICollectionViewDataSource, UICollectionViewDelegate
 
 extension CXSegmentControl: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateIndicator()
+        updateIndicator(animted: false)
     }
 }

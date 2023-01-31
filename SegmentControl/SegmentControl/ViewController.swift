@@ -19,11 +19,16 @@ class ViewController: UIViewController {
                    .init(content: .textImage(createTextItem("AAA"), createImageItem(), .left(spacing: 2)))
                    
         ]
-        //s.visibleType = .fixed(maxVisibleItems: 3)
+        //s.visibleType = .fixed(maxVisibleItems: 6)
+        s.visibleType = .dynamic
+        s.collectionViewlayout.minimumLineSpacing = 100
         s.indicatorConfig.padding = 0
         s.indicatorConfig.position = .bottom
         s.indicatorConfig.width = .fix(20)
-        s.selectIndex(2, animated: false)
+        s.defaultSelectedIndex = 5
+        s.valueDidChange = { idx in
+            print(idx)
+        }
         return s
     }()
     
@@ -56,10 +61,14 @@ class ViewController: UIViewController {
         clickBtn.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
     }
+    var currentIndex = 0
     @objc func clickAction() {
-        segControl.selectIndex(Int.random(in: 0..<segControl.items.count), animated: true)
+        if currentIndex == segControl.items.count {
+            currentIndex = 0
+        }
+        segControl.selectIndex(currentIndex, animated: true)
+        currentIndex += 1
     }
 }
 
