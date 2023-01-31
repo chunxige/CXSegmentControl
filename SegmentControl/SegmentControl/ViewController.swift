@@ -19,9 +19,9 @@ class ViewController: UIViewController {
                    .init(content: .textImage(createTextItem("AAA"), createImageItem(), .left(spacing: 2)))
                    
         ]
-        //s.visibleType = .fixed(maxVisibleItems: 6)
-        s.visibleType = .dynamic
-        s.collectionViewlayout.minimumLineSpacing = 100
+        s.visibleType = .fixed(maxVisibleItems: 4)
+        //s.visibleType = .dynamic
+        s.defaultItemSpacing = 50
         s.indicatorConfig.padding = 0
         s.indicatorConfig.position = .bottom
         s.indicatorConfig.width = .fix(20)

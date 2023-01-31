@@ -31,6 +31,8 @@ class CXSegmentControl: UIView {
     
     var defaultSelectedIndex = 0
     
+    var defaultItemSpacing = CGFloat(20)
+    
     private let indicatorView = UIView()
     
     public private(set) var selectedIndex = 0 {
@@ -42,7 +44,6 @@ class CXSegmentControl: UIView {
     lazy var collectionViewlayout: UICollectionViewFlowLayout = {
         let l = UICollectionViewFlowLayout.init()
         l.scrollDirection = .horizontal
-        l.minimumInteritemSpacing = 50
         return l
     }()
     
@@ -68,6 +69,8 @@ class CXSegmentControl: UIView {
             return
         }
         _isFristLayout = false
+        collectionViewlayout.minimumLineSpacing = defaultItemSpacing
+        collectionViewlayout.minimumInteritemSpacing = defaultItemSpacing
         selectIndex(defaultSelectedIndex, animated: false)
     }
     
@@ -194,7 +197,7 @@ extension CXSegmentControl: UICollectionViewDataSource, UICollectionViewDelegate
             return CGSize.init(width: item.contentWidth, height: collectionView.frame.height)
         case .fixed(let maxVisibleItems):
             let maxCount = maxVisibleItems > items.count ? items.count : maxVisibleItems
-            let width = (collectionView.frame.width - self.collectionViewlayout.minimumInteritemSpacing * CGFloat(maxCount - 1)) / CGFloat(maxCount)
+            let width = (collectionView.frame.width - self.collectionViewlayout.minimumLineSpacing * CGFloat(maxCount - 1)) / CGFloat(maxCount)
             return .init(width: width, height: collectionView.frame.height)
         }
         
