@@ -106,7 +106,16 @@ enum CXSegmentContent {
         let selectedColor: UIColor
         let selectedFont: UIFont
         let selectedBackgroundColor: UIColor
-
+        
+        init(title: String, color: UIColor, font: UIFont, backgroundColor: UIColor = .clear, selectedColor: UIColor = .black, selectedFont: UIFont = .systemFont(ofSize: 15), selectedBackgroundColor: UIColor = .clear) {
+            self.title = title
+            self.color = color
+            self.font = font
+            self.backgroundColor = backgroundColor
+            self.selectedColor = selectedColor
+            self.selectedFont = selectedFont
+            self.selectedBackgroundColor = selectedBackgroundColor
+        }
     }
     
     struct Image {

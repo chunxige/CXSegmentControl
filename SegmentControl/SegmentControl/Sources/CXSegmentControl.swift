@@ -29,6 +29,8 @@ class CXSegmentControl: UIView {
     
     var valueDidChange: (Int) -> Void = {_ in }
     
+    var valueShouldChange: ((Int) -> Bool) = { _ in return true}
+    
     var defaultSelectedIndex = 0
     
     var defaultItemSpacing = CGFloat(20)
@@ -41,7 +43,7 @@ class CXSegmentControl: UIView {
         }
     }
     
-    lazy var collectionViewlayout: UICollectionViewFlowLayout = {
+    private let collectionViewlayout: UICollectionViewFlowLayout = {
         let l = UICollectionViewFlowLayout.init()
         l.scrollDirection = .horizontal
         return l
@@ -119,6 +121,7 @@ class CXSegmentControl: UIView {
     }
     
     func selectIndex(_ index: Int, animated: Bool) {
+        guard valueShouldChange(index) else { return }
         selectedIndex = index
         collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: animated)
         collectView.collectionViewLayout.invalidateLayout()
@@ -183,6 +186,7 @@ extension CXSegmentControl: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard valueShouldChange(indexPath.item) else { return }
         selectedIndex = indexPath.item
         collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: true)
         collectView.collectionViewLayout.invalidateLayout()

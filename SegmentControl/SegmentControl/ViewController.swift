@@ -29,6 +29,9 @@ class ViewController: UIViewController {
         s.valueDidChange = { idx in
             print(idx)
         }
+        s.valueShouldChange = { idx in
+            idx != 2
+        }
         return s
     }()
     
