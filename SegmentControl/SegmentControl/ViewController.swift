@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         s.indicatorConfig.padding = 0
         s.indicatorConfig.position = .bottom
         s.indicatorConfig.width = .fix(20)
-        s.defaultSelectedIndex = 5
+        s.defaultSelectedIndex = 4
         s.valueDidChange = { idx in
             print(idx)
         }

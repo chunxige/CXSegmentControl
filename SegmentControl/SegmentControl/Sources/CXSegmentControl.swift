@@ -37,11 +37,11 @@ class CXSegmentControl: UIView {
     
     private let indicatorView = UIView()
     
-    public private(set) var selectedIndex = 0 {
-        didSet {
-            valueDidChange(selectedIndex)
-        }
+    public var selectedIndex: Int {
+        _selectedIndex
     }
+    
+    private var _selectedIndex = 0
     
     private let collectionViewlayout: UICollectionViewFlowLayout = {
         let l = UICollectionViewFlowLayout.init()
@@ -73,7 +73,7 @@ class CXSegmentControl: UIView {
         _isFristLayout = false
         collectionViewlayout.minimumLineSpacing = defaultItemSpacing
         collectionViewlayout.minimumInteritemSpacing = defaultItemSpacing
-        selectIndex(defaultSelectedIndex, animated: false)
+        selectIndex(defaultSelectedIndex, animated: false, triggerAction: false)
     }
     
     private func setup() {
@@ -121,16 +121,23 @@ class CXSegmentControl: UIView {
     }
     
     func selectIndex(_ index: Int, animated: Bool) {
+        selectIndex(index, animated: animated, triggerAction: true)
+    }
+ 
+    private func selectIndex(_ index: Int, animated: Bool, triggerAction: Bool) {
         guard valueShouldChange(index) else { return }
-        selectedIndex = index
+        _selectedIndex = index
+        if triggerAction {
+            valueDidChange(index)
+        }
         collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: animated)
         collectView.collectionViewLayout.invalidateLayout()
         collectView.reloadData()
         updateIndicator(animted: animated)
     }
- 
+    
     private var selectedIndexPath: IndexPath {
-        IndexPath.init(item: selectedIndex, section: 0)
+        IndexPath.init(item: _selectedIndex, section: 0)
     }
 }
 
@@ -186,12 +193,7 @@ extension CXSegmentControl: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard valueShouldChange(indexPath.item) else { return }
-        selectedIndex = indexPath.item
-        collectView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: true)
-        collectView.collectionViewLayout.invalidateLayout()
-        collectView.reloadData()
-        updateIndicator(animted: true)
+        selectIndex(indexPath.item, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
